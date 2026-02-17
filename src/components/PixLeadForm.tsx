@@ -198,19 +198,29 @@ export default function PixLeadForm({
         <textarea className="textarea" value={pix} onChange={(e) => setPix(e.target.value)} />
 
         <div className="row" style={{ marginTop: 10 }}>
-          {/* Botões continuam "habilitados", mas ao clicar valida e mostra erro */}
-          <button className="btn btnGreen" disabled={state === "sending"} onClick={generate}>
-            {state === "sending" ? "Gerando..." : "Gerar QR"}
-          </button>
+  <button
+    className={`btn btnGreen ${!canSubmit ? "btnDisabled" : ""}`}
+    disabled={state === "sending"}
+    onClick={generate}
+    title={!canSubmit ? "Preencha Nome, E-mail e WhatsApp para continuar" : undefined}
+  >
+    {state === "sending" ? "Gerando..." : "Gerar QR"}
+  </button>
 
-          <button className="btn btnGhost" type="button" disabled={state === "sending"} onClick={copyPix}>
-            {state === "sending" ? "Enviando..." : "Copiar Pix"}
-          </button>
+  <button
+    className={`btn btnGhost ${!canSubmit ? "btnDisabled" : ""}`}
+    type="button"
+    disabled={state === "sending"}
+    onClick={copyPix}
+    title={!canSubmit ? "Preencha Nome, E-mail e WhatsApp para continuar" : undefined}
+  >
+    {state === "sending" ? "Enviando..." : "Copiar Pix"}
+  </button>
 
-          <a className="btn btnPink" href={waLink} target="_blank" rel="noreferrer">
-            Falar no WhatsApp
-          </a>
-        </div>
+  <a className="btn btnPink" href={waLink} target="_blank" rel="noreferrer">
+    Falar no WhatsApp
+  </a>
+</div>
 
         {msg && <div className={state === "err" ? "msgErr" : "msgOk"}>{msg}</div>}
       </div>
